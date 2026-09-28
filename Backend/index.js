@@ -31,16 +31,16 @@ server.use(express.json());
 const usersRoutes = require("./Routes/usersRoutes");
 const authRoutes = require("./Routes/authRoutes");
 
-//register router
-server.use(usersRoutes);
-server.use(authRoutes);
-
 // configure cors
 server.use(
   cors({
-    origin: "first-backend-sand.vercel.app",
+    origin: ["https://first-backend-sand.vercel.app", "http://localhost:5173"],
   })
 );
+
+//register router
+server.use(usersRoutes);
+server.use(authRoutes);
 
 mongoose
   .connect(MONGO_URL)
