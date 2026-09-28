@@ -38,7 +38,7 @@ server.use(authRoutes);
 // configure cors
 server.use(
   cors({
-    origin: "",
+    origin: "first-backend-sand.vercel.app",
   })
 );
 
