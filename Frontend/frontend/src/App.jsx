@@ -1,0 +1,25 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import AuthPage from './pages/AuthPage';
+import Dashboard from './pages/Dashboard';
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<AuthPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
