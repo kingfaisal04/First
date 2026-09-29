@@ -49,7 +49,7 @@ mongoose
 
     //Start and listen to the server
     server.listen(PORT, () => {
-      console.log(`Hey my server just started 3000`);
+      console.log(`Hey my server just started 5000`);
     });
   })
   .catch((err) => {

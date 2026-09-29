@@ -1,6 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-// --- Auth Endpoints ---
+// ========================================
+// AUTH ENDPOINTS
+// ========================================
 
 export const loginUser = async (credentials) => {
   const response = await fetch(`${API_URL}/login`, {
@@ -10,12 +12,12 @@ export const loginUser = async (credentials) => {
     },
     body: JSON.stringify(credentials),
   });
-  
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Login failed");
   }
-  
+
   return response.json();
 };
 
@@ -27,22 +29,33 @@ export const registerUser = async (userData) => {
     },
     body: JSON.stringify(userData),
   });
-  
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Registration failed");
   }
-  
+
   return response.json();
 };
 
-//  Student Endpoints 
+
+// ========================================
+// STUDENT ENDPOINTS
+// ========================================
 
 export const getStudents = async () => {
-  const response = await fetch(`${API_URL}/student`);
-  if (!response.ok) throw new Error("Failed to fetch students");
+  const response = await fetch(`${API_URL}/student`, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to fetch students");
+  }
+
   return response.json();
 };
+
 
 export const createStudent = async (studentData) => {
   const response = await fetch(`${API_URL}/student`, {
@@ -52,9 +65,15 @@ export const createStudent = async (studentData) => {
     },
     body: JSON.stringify(studentData),
   });
-  if (!response.ok) throw new Error("Failed to create student");
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to create student");
+  }
+
   return response.json();
 };
+
 
 export const updateStudent = async (id, studentData) => {
   const response = await fetch(`${API_URL}/student/${id}`, {
@@ -64,14 +83,25 @@ export const updateStudent = async (id, studentData) => {
     },
     body: JSON.stringify(studentData),
   });
-  if (!response.ok) throw new Error("Failed to update student");
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to update student");
+  }
+
   return response.json();
 };
+
 
 export const deleteStudent = async (id) => {
   const response = await fetch(`${API_URL}/student/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Failed to delete student");
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to delete student");
+  }
+
   return response.json();
 };
