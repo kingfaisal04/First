@@ -5,14 +5,17 @@ import { UserPlus, LogIn, Loader2, Eye, EyeOff } from 'lucide-react';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -142,14 +145,15 @@ const AuthPage = () => {
           {/* Toggle */}
           <div className="mt-6 text-center">
             <button
-              type="button"
-              onClick={() => {
+               type="button"
+                onClick={() => {
                 setIsLogin(!isLogin);
                 setError('');
-              }}
-              className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline focus:outline-none"
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Log in"}
+                setShowPassword(false);
+               }}
+               className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline focus:outline-none"
+               >
+               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Log in"}
             </button>
           </div>
         </div>
