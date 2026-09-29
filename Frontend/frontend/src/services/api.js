@@ -36,7 +36,7 @@ export const registerUser = async (userData) => {
   return response.json();
 };
 
-// --- Student Endpoints ---
+//  Student Endpoints 
 
 export const getStudents = async () => {
   const response = await fetch(`${API_URL}/student`);

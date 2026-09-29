@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, registerUser } from '../services/api';
-import { UserPlus, LogIn, Loader2 } from 'lucide-react';
+import { UserPlus, LogIn, Loader2, Eye, EyeOff } from 'lucide-react';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,9 +21,17 @@ const AuthPage = () => {
 
   // redirecting to login.
   const handleSignup = async (formData) => {
-  const res = await registerUser(formData);
+  await registerUser(formData);
 
-  navigate("/login");
+  setFormData({
+    username:'',
+
+    email: formData.email,
+
+    password: ''
+  });
+
+  setIsLogin(true);
 };
 
   const handleSubmit = async (e) => {
@@ -97,18 +105,29 @@ const AuthPage = () => {
               />
             </div>
             
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-              <input
-                type="password"
-                name="password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-transparent dark:text-white transition-colors outline-none"
-                placeholder="••••••••"
+           <div className="relative">
+             <input
+               type={showPassword ? "text" : "password"}
+               name="password"
+               required
+               value={formData.password}
+               onChange={handleChange}
+               className="w-full px-4 py-2 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-transparent dark:text-white transition-colors outline-none"
+               placeholder="••••••••"
               />
-            </div>
+             <button
+               type="button"
+               onClick={() => setShowPassword(!showPassword)}
+               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+               aria-label={showPassword ? "Hide password" : "Show password"}
+               >
+                {showPassword ? (
+               <EyeOff className="w-5 h-5" />
+                ) : (
+               <Eye className="w-5 h-5" />
+               )}
+              </button>
+           </div>
 
             <button
               type="submit"
