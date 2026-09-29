@@ -19,26 +19,12 @@ const AuthPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Redirect to login after sign up and store user data in react state memory after successful registration.
+  // redirecting to login.
   const handleSignup = async (formData) => {
-  const response = await fetch("http://localhost:5000/api/auth/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-  });
+  const res = await registerUser(formData);
 
-  const data = await response.json();
-
-  if (response.ok) {
-    navigate("/login");
-  } else {
-    console.log(data.message);
-  }
+  navigate("/login");
 };
-
-//  Redirect to login after sign up and store user data in react state memory after successful registration.
 
   const handleSubmit = async (e) => {
     e.preventDefault();
