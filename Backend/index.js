@@ -2,7 +2,7 @@
 const cors = require("cors");
 
 // import dns module
-const dns = require("dns");
+const dns = require("dns"); 
 
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
@@ -35,6 +35,7 @@ const authRoutes = require("./Routes/authRoutes");
 server.use(
   cors({
     origin: ["https://first-backend-sand.vercel.app", "http://localhost:5173"],
+
   })
 );
 
@@ -54,6 +55,7 @@ mongoose
   })
   .catch((err) => {
     console.log(err);
+    res.status(500).json({ message: "Cannot connect to server" });
   });
 
 //import controller
